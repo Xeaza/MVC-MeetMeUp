@@ -26,5 +26,7 @@
     return self;
 }
 
+// In MemberViewController.m remove the business logic from -viewDidLoad and put it in a class method on the Member class
+
 
 @end

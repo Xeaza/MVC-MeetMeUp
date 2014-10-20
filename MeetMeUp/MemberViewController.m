@@ -23,7 +23,7 @@
     self.photoImageView.alpha = 0;
 
 
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.meetup.com/2/member/%@?&sign=true&photo-host=public&page=20&key=YOUR_API_KEY_HERE",self.memberID]];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.meetup.com/2/member/%@?&sign=true&photo-host=public&page=20&key=11744725b2c306e2d9711156454a12",self.memberID]];
 
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
 
