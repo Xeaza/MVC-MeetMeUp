@@ -23,6 +23,7 @@
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 
-+ (void)performSearchWithKeyword: (NSString *)keyword completionBlock:(void (^)(NSArray *))complete;
++ (void)performSearchWithKeyword: (NSString *)keyword completionBlock:(void (^)(NSArray *meetUps))complete;
+- (void)requestEventCommentsForId:(NSString *)eventID completionBlock:(void (^)(NSArray *eventComments))complete;
 
 @end

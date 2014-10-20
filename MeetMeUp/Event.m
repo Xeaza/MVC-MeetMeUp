@@ -7,6 +7,7 @@
 //
 
 #import "Event.h"
+#import "Comment.h"
 
 @implementation Event
 
@@ -30,7 +31,7 @@
     return self;
 }
 
-+ (void)performSearchWithKeyword: (NSString *)keyword completionBlock:(void (^)(NSArray *))complete
++ (void)performSearchWithKeyword: (NSString *)keyword completionBlock:(void (^)(NSArray *meetUps))complete
 {
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.meetup.com/2/open_events.json?zip=60604&text=%@&time=,1w&key=11744725b2c306e2d9711156454a12",keyword]];
 
@@ -46,6 +47,23 @@
             [meetUps addObject:event];
         }
         complete(meetUps);
+    }];
+}
+
+- (void)requestEventCommentsForId:(NSString *)eventID completionBlock:(void (^)(NSArray *eventComments))complete
+{
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.meetup.com/2/event_comments?&sign=true&photo-host=public&event_id=%@&page=20&key=11744725b2c306e2d9711156454a12",eventID]];
+
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+
+    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+
+        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+
+        NSArray *jsonArray = [dict objectForKey:@"results"];
+
+        self.commentsArray = [Comment objectsFromArray:jsonArray];
+        complete(self.commentsArray);
     }];
 }
 

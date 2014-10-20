@@ -32,9 +32,7 @@
     self.hostedByLabel.text = self.event.hostedBy;
     self.descriptionTextview.text = self.event.eventDescription;
 
-
     self.navigationItem.rightBarButtonItem.title = @"MEHH";
-
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender

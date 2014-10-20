@@ -24,8 +24,6 @@
     return self;
 }
 
-
-
 + (void) requestMemberData: (NSString *)memberID  completionBlock:(void (^)(Member *))complete {
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.meetup.com/2/member/%@?&sign=true&photo-host=public&page=20&key=11744725b2c306e2d9711156454a12",memberID]];
 

@@ -26,7 +26,6 @@
     [Event performSearchWithKeyword:@"mobile" completionBlock:^(NSArray *meetUps) {
         self.dataArray = meetUps;
     }];
-
 }
 
 - (void)setDataArray:(NSArray *)dataArray {
