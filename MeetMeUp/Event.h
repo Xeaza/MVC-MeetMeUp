@@ -21,7 +21,8 @@
 @property (nonatomic, strong) NSURL *photoURL;
 @property (nonatomic, strong) NSArray *commentsArray;
 
-+ (NSArray *)eventsFromArray:(NSArray *)incomingArray;
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
+
++ (void)performSearchWithKeyword: (NSString *)keyword completionBlock:(void (^)(NSArray *))complete;
 
 @end
