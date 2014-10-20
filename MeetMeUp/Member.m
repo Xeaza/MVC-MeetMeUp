@@ -20,13 +20,24 @@
         self.country = dictionary[@"country"];
         
         self.photoURL = [NSURL URLWithString:dictionary[@"photo"][@"photo_link"]];
-        
-        
     }
     return self;
 }
 
-// In MemberViewController.m remove the business logic from -viewDidLoad and put it in a class method on the Member class
+
+
++ (void) requestMemberData: (NSString *)memberID  completionBlock:(void (^)(Member *))complete {
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.meetup.com/2/member/%@?&sign=true&photo-host=public&page=20&key=11744725b2c306e2d9711156454a12",memberID]];
+
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+
+    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+
+            Member *member = [[Member alloc]initWithDictionary:dict];
+            complete(member);
+       }];
+}
 
 
 @end
