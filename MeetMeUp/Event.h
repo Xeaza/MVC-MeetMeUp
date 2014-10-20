@@ -8,6 +8,7 @@
 
 #import "Comment.h"
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @interface Event : NSObject
 
@@ -24,6 +25,8 @@
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 
 + (void)performSearchWithKeyword: (NSString *)keyword completionBlock:(void (^)(NSArray *meetUps))complete;
+
 - (void)requestEventCommentsForId:(NSString *)eventID completionBlock:(void (^)(NSArray *eventComments))complete;
+- (void)requestEventImageForUrl:(NSURL *)imageURL completionBlock:(void (^)(UIImage *eventImage))complete;
 
 @end

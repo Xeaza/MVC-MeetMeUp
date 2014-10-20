@@ -48,27 +48,33 @@
 
     cell.textLabel.text = event.name;
     cell.detailTextLabel.text = event.address;
-    if (event.photoURL)
-    {
-        NSURLRequest *imageReq = [NSURLRequest requestWithURL:event.photoURL];
-        
-        [NSURLConnection sendAsynchronousRequest:imageReq queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
-           dispatch_async(dispatch_get_main_queue(), ^{
-               if (!connectionError) {
-                   [cell.imageView setImage:[UIImage imageWithData:data]];
-                   [cell layoutSubviews];
-               }
-           });
 
+    [event requestEventImageForUrl:event.photoURL completionBlock:^(UIImage *eventImage) {
+        [cell.imageView setImage:eventImage];
+        [cell layoutSubviews];
+    }];
 
-        }];
-        
-        
-    }else
-    {
-       [cell.imageView setImage:[UIImage imageNamed:@"logo"]];
-    }
-    
+//    if (event.photoURL)
+//    {
+//        NSURLRequest *imageReq = [NSURLRequest requestWithURL:event.photoURL];
+//        
+//        [NSURLConnection sendAsynchronousRequest:imageReq queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+//           dispatch_async(dispatch_get_main_queue(), ^{
+//               if (!connectionError) {
+//                   [cell.imageView setImage:[UIImage imageWithData:data]];
+//                   [cell layoutSubviews];
+//               }
+//           });
+//
+//
+//        }];
+//        
+//        
+//    }else
+//    {
+//       [cell.imageView setImage:[UIImage imageNamed:@"logo"]];
+//    }
+
     return cell;
 }
 

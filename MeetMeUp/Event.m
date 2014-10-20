@@ -9,6 +9,7 @@
 #import "Event.h"
 #import "Comment.h"
 
+
 @implementation Event
 
 
@@ -67,5 +68,23 @@
     }];
 }
 
+- (void)requestEventImageForUrl:(NSURL *)imageURL completionBlock:(void (^)(UIImage *eventImage))complete {
+    if (imageURL)
+    {
+        NSURLRequest *imageReq = [NSURLRequest requestWithURL:imageURL];
+
+        [NSURLConnection sendAsynchronousRequest:imageReq queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (!connectionError) {
+                    complete([UIImage imageWithData:data]);
+                }
+            });
+        }];
+    }
+    else
+    {
+        complete([UIImage imageNamed:@"logo"]);
+    }
+}
 
 @end

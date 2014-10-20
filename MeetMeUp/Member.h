@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @interface Member : NSObject
 
@@ -19,6 +20,8 @@
 
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
+
+- (void)requestMembersPhotoForUrl:(NSURL *)imageURL completionBlock:(void (^)(UIImage *memberImage))complete;
 + (void) requestMemberData: (NSString *)memberID  completionBlock:(void (^)(Member *))complete;
 
 

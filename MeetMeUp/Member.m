@@ -37,5 +37,12 @@
        }];
 }
 
+- (void)requestMembersPhotoForUrl:(NSURL *)imageURL completionBlock:(void (^)(UIImage *memberImage))complete;
+{
+    [NSURLConnection sendAsynchronousRequest:[NSURLRequest requestWithURL:imageURL] queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+        complete([UIImage imageWithData:data]);
+    }];
+}
+
 
 @end
