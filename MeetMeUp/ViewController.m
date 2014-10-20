@@ -29,7 +29,7 @@
 
 - (void)performSearchWithKeyword:(NSString *)keyword
 {
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.meetup.com/2/open_events.json?zip=60604&text=%@&time=,1w&key=YOUR_API_KEY_HERE",keyword]];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.meetup.com/2/open_events.json?zip=60604&text=%@&time=,1w&key=11744725b2c306e2d9711156454a12",keyword]];
     
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     
