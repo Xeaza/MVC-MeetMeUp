@@ -27,7 +27,11 @@
         self.eventDescription = dictionary[@"description"];
         self.address = dictionary[@"venue"][@"address"];
         self.eventURL = [NSURL URLWithString:dictionary[@"event_url"]];
-        self.photoURL = [NSURL URLWithString:dictionary[@"photo_url"]];
+        //self.photoURL = [NSURL URLWithString:dictionary[@"photo_url"]];
+        int width = arc4random_uniform(100) + 100;
+        int height = arc4random_uniform(100) + 100;
+        self.photoURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://placekitten.com/%d/%d", width, height]];
+
     }
     return self;
 }

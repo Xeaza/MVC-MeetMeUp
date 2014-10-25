@@ -48,11 +48,38 @@
 
     cell.textLabel.text = event.name;
     cell.detailTextLabel.text = event.address;
+    cell.tag = event.photoURL.hash;
 
-    [event requestEventImageForUrl:event.photoURL completionBlock:^(UIImage *eventImage) {
-        [cell.imageView setImage:eventImage];
-        [cell layoutSubviews];
-    }];
+//    [event requestEventImageForUrl:event.photoURL completionBlock:^(UIImage *eventImage) {
+//        [cell.imageView setImage:eventImage];
+//        [cell layoutSubviews];
+//    }];
+
+    if (event.photoURL)
+    {
+        NSURLRequest *request = [NSURLRequest requestWithURL:event.photoURL];
+        [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+
+            // fixing flicker issue
+            // check if the cell the image is going in is still the cell that represents that event.
+            // We do that by setting the cell's tag to the photoURL's tag
+            // Should have a custom cell with a property that is set to the event.
+            // This code should go in the custom cell. Check "Is the event the same event"
+            if (cell.tag == response.URL.hash) {
+                UIImage *image = [UIImage imageWithData:data];
+                cell.imageView.image = image;
+            }
+            else
+            {
+                NSLog(@"Loaded wrong image!");
+            }
+
+        }];
+    }
+    else
+    {
+        [cell.imageView setImage:[UIImage imageNamed:@"logo"]];
+    }
 
     return cell;
 }
