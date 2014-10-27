@@ -19,7 +19,6 @@
     if (self) {
         
         self.name = dictionary[@"name"];
-        
 
         self.eventID = dictionary[@"id"];
         self.RSVPCount = [NSString stringWithFormat:@"%@",dictionary[@"yes_rsvp_count"]];
